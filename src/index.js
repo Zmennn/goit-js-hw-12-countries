@@ -4,15 +4,21 @@ import debounce from 'lodash/debounce';
 import countriesTemplate from './hbs/countries.hbs';
 import countryTemplate from './hbs/country.hbs'
 
-refs.input.addEventListener('input', debounce(onInput, 1500));
+refs.input.addEventListener('input', debounce(onInput, 1000));
 
 
 function onInput(event) {
 
     fetchCountries(event.target.value)
 
-        .then(response => response.json())
+        .then(response => {
+            if (response.ok) { return response.json() };
+            onError(response)
+
+
+        })
         .then((countries) => responseHandler(countries))
+        .catch((err) => { console.log("catch", err) })
 
 }
 
@@ -30,4 +36,8 @@ function responseHandler(countries) {
         refs.output.innerHTML = countriesTemplate(countries);
         return
     }
+}
+
+function onError(err) {
+    console.log("ooo", err);
 }
