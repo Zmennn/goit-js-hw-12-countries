@@ -6,7 +6,9 @@ refs.input.addEventListener('input', debounce(onInput, 1500));
 
 
 function onInput(event) {
-    console.log(event.target.value);
-    fetchCountries(event.target.value);
 
+    fetchCountries(event.target.value)
+
+        .then(response => { return response.json() })
+        .then((country) => console.log(country))
 }

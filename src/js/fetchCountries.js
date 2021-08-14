@@ -2,5 +2,6 @@
 
 
 export default function fetchCountries(searchQuery) {
-    fetch(`https://restcountries.eu/rest/v2/name/${searchQuery}`)
+    const url = `https://restcountries.eu/rest/v2/name/${searchQuery}`;
+    return fetch(url)
 }
