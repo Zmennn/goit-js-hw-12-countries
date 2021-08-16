@@ -6,7 +6,6 @@ a {
 .list {
   margin: 0;
   padding-left: 3vw;
-  line-height: 2;
 }
 
 h1,
@@ -25,14 +24,20 @@ html {
   box-sizing: inherit;
 }
 
+body {
+  background-color: rgb(186, 188, 195);
+}
+
 .section {
   padding-top: 2%;
   padding-bottom: 1%;
 }
+
 .title-section {
   text-align: center;
   font-size: 3.5vh;
 }
+
 .input-section {
   display: inline-block;
   margin-left: 3vw;
@@ -73,8 +78,24 @@ html {
   flex-flow: row;
 }
 
+.country-container__item {
+  display: inline-block;
+  color: black;
+  height: 7vh;
+  transition: color 350ms;
+}
+
+.country-container__item:hover,
+.country-container__item:focus {
+  color: rgb(16, 16, 204);
+}
+
 .flag-container img {
   object-fit: cover;
   height: auto;
   width: 30vw;
+}
+
+.languages-list-item {
+  margin-top: 3vh;
 }

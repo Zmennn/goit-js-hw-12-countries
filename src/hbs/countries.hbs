@@ -1,5 +1,9 @@
-<ul class="list">
+<ul class="list countries-list">
     {{#each this}}
-    <li data-attribute="country">{{name}}</li>
+    <li >
+     <a data-attribute="country"
+      class="country-container__item"
+       href="">{{name}}</a>   
+    </li>
     {{/each}}
 </ul>

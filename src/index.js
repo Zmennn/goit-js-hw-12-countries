@@ -24,44 +24,53 @@ function onInput(event) {
         .then(response => response.ok ? response : Promise.reject(response))
         .then(response => response.json())
         .then((countries) => {
-            responseHandler(countries)
+            new ResultHandler(countries)
         })
 
-        .catch((err) => { console.log(err); errorHandler(err.status) })
+        .catch((err) => { errorHandler(err.status) })
 };
 
 
+class ResultHandler {
 
-
-
-
-
-function responseHandler(countries) {
-
-
-    const numberCountries = countries.length;
-    if (numberCountries === 1) {
-
-        refs.output.innerHTML = countryTemplate(countries[0]);
-        return
-
-    };
-    if (numberCountries > 1 && numberCountries <= 10) {
-
-        refs.output.innerHTML = countriesTemplate(countries);
-        refs.countryList.addEventListener('click', onCountryList)
-        return
+    constructor(countries) {
+        this.countries = countries;
+        this.responseHandler();
     };
 
-    onErrorNotification("Уточните запрос", "Полученно слишком много результатов")
-};
+    responseHandler() {
 
 
+        const numberCountries = this.countries.length;
+        if (numberCountries === 1) {
 
+            refs.output.innerHTML = countryTemplate(this.countries[0]);
+            return
 
+        };
+        if (numberCountries > 1 && numberCountries <= 10) {
 
+            refs.output.innerHTML = countriesTemplate(this.countries);
+            refs.countryList.addEventListener('click', this.onCountryList.bind(this))
+            return
+        };
 
+        onErrorNotification("Уточните запрос", "Полученно слишком много результатов")
+    };
 
+    onCountryList(event) {
+        refs.countryList.removeEventListener('click', this.onCountryList.bind(this));
+        event.preventDefault();
+
+        if (event.target.dataset.attribute !== "country") { return };
+
+        this.countries.forEach((country) => {
+            if (country.name === event.target.textContent) {
+                refs.output.innerHTML = countryTemplate(country)
+            }
+        })
+    }
+}
 
 
 function errorHandler(errNumber) {
@@ -78,11 +87,3 @@ function errorHandler(errNumber) {
 
 
 
-function onCountryList(event) {
-
-
-    if (event.target.dataset.attribute !== "country") { return };
-    const a = event.target.textContent
-    console.log(coun).bind(responseHandler);
-
-}
