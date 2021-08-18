@@ -18,7 +18,7 @@ export const notificationSettings = new Stack({
 export function onErrorNotification(title, text) {
     error({
         title: title,
-        delay: 80000,
+        delay: 5000,
         text: text,
         stack: notificationSettings
     })

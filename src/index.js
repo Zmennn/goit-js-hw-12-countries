@@ -1,3 +1,8 @@
+// Страны в списке от 2 до 10 шт сделаны кликабельными,
+//     оно просилось так сделать, хоть в условии вроде нет
+//     такого требования)
+
+
 import fetchCountries from './js/fetchCountries';
 import { refs } from './js/refs';
 import debounce from 'lodash/debounce';
@@ -74,7 +79,7 @@ class ResultHandler {
 
 
 function errorHandler(errNumber) {
-    console.log(errNumber);
+
     if (errNumber === 404) {
         onErrorNotification("Ошибка", "Похоже такой страны нет");
         return
